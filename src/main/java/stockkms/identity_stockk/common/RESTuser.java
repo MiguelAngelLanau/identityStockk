@@ -1,5 +1,5 @@
 
-package fs.stockk.ms.common;
+package stockkms.identity_stockk.common;
 
 
 import com.google.gson.Gson;
