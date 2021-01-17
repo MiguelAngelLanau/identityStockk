@@ -13,6 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import stockkms.identity_stockk.IdentityStore;
+import sun.security.krb5.KrbException;
 
 @Path("user")
 @RequestScoped
@@ -21,7 +22,7 @@ public class StockkIdentityUserService {
     private UriInfo context;
     private IdentityStore identityStore;
     
-    public StockkIdentityUserService(){
+    public StockkIdentityUserService() throws KrbException{
         identityStore = IdentityStore.getInstance();
     }
     

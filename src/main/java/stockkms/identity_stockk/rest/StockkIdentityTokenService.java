@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import stockkms.identity_stockk.IdentityStore;
+import sun.security.krb5.KrbException;
 
 @Path("token")
 @RequestScoped
@@ -25,7 +26,7 @@ public class StockkIdentityTokenService {
     private UriInfo context;
     private IdentityStore identityStore;
     
-    public StockkIdentityTokenService(){
+    public StockkIdentityTokenService() throws KrbException{
         identityStore = IdentityStore.getInstance();
     }
     

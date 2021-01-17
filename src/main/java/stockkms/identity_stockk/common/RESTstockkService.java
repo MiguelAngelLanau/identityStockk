@@ -20,9 +20,6 @@ public class RESTstockkService implements Serializable {
     public Long getHowMsOld() {
         return howMsOld;
     }
-
-
-    
     
     /**
      * @return the name
