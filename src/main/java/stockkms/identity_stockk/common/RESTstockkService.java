@@ -3,7 +3,6 @@ package stockkms.identity_stockk.common;
 
 
 import com.google.gson.Gson;
-import stockkms.identity_stockk.common.StatusCode;
 import java.io.Serializable;
 
 /**

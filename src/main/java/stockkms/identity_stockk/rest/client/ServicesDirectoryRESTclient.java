@@ -1,9 +1,9 @@
 package stockkms.identity_stockk.rest.client;
 
+import stockkms.identity_stockk.common.RESTstockkService;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
-import stockkms.identity_stockk.common.RESTstockkService;
 
 /**
  * Jersey REST client generated for REST resource:ServicesDirectoryRESTservice
