@@ -24,7 +24,7 @@ public class IdentityStore {
     private Configs config;
     private Map<String, RESTuser> users;
     private Gson gson;
-    //private final String filePath ="identity_stockk/users.json";
+    private final String filePath ="identity_stockk/users.json";
 
     public IdentityStore() throws KrbException {
         try{
