@@ -15,17 +15,15 @@ public class RESTuser implements Serializable {
 
     private String login;
     private String name;
-    private byte[] publicKey;
     
                                     
     public RESTuser(){
         
     }
     
-    public RESTuser(String _login, String _name, byte[] _publicKey){
+    public RESTuser(String _login, String _name){
         this.login      = _login;
         this.name       = _name;
-        this.publicKey  = _publicKey;
     }
     
     /**
@@ -42,15 +40,6 @@ public class RESTuser implements Serializable {
      */
     public String getName() {
         return name;
-    }
-
-
-
-    /**
-     * @return the publicKey
-     */
-    public byte[] getPublicKey() {
-        return publicKey;
     }
 
 
@@ -72,13 +61,6 @@ public class RESTuser implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @param publicKey the publicKey to set
-     */
-    public void setPublicKey(byte[] publicKey) {
-        this.publicKey = publicKey;
     }
 
 }

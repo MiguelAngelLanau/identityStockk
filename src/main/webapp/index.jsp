@@ -12,14 +12,6 @@
         <title>Identity stockk-ms</title>
     </head>
     <body>
-        <h1>Identity stockk-ms</h1>
-        <br>
-        <form method="POST" action="login">
-            Login: <input name="login">
-            <br>
-            Contraseña: <input type="password" name="pwd">
-            <br>
-            <input type="submit" value="Login">
-        </form>
+        <h1>Identity stockk-ms</h1>        
     </body>
 </html>
