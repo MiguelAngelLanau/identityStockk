@@ -20,7 +20,7 @@ public class TouchTimer {
 
     
     
-    @Schedule(hour="*", minute = "*", second = "5", persistent = false)
+    @Schedule(hour="*", minute = "*", second = "24", persistent = false)
     public void timer(){
         touch(StatusCode.NOMINAL);
     }
@@ -28,7 +28,7 @@ public class TouchTimer {
     
     public void touch(StatusCode _status) {
         RESTstockkService service = new RESTstockkService();
-        service.setName("MA-DEMO");
+        service.setName("stockk_IDENTITY");
         service.setUri("http://155.210.71.106:7030/stockk-identity/rest");  // <== colocar la URL que corresponda a la aplicación
         service.setStatus(_status);
         service.setMs(System.currentTimeMillis());

@@ -52,8 +52,8 @@ public class IdentityStore {
     }
     
     private void load() throws FileNotFoundException{
-        //File f = new File(config.getProp(Configs.IDENTITY_FILE_PATH));
-        File f = new File(filePath);
+        File f = new File(config.getProp(Configs.IDENTITY_FILE_PATH));
+        //File f = new File(filePath);
         if (! f.exists()){
             File fd = new File(config.getProp(Configs.IDENTITY_DIRECTORY_NAME));
             if (! fd.exists()){
@@ -71,8 +71,8 @@ public class IdentityStore {
 
     private synchronized void save(){
         try {
-            //FileWriter fw = new FileWriter(config.getProp(Configs.IDENTITY_FILE_PATH));
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(config.getProp(Configs.IDENTITY_FILE_PATH));
+            //FileWriter fw = new FileWriter(filePath);
             gson.toJson(users, fw);
             fw.flush();
             fw.close();

@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class Configs {
 
-    private static final String CONFIG_FILE = "config.properties";
+    private static final String CONFIG_FILE = "identity_stockk/config.properties";
     
     public static final String SERVICES_DIRECTORY_BASE_URI = "SERVICES_DIRECTORY_BASE_URI";
     public static final String IDENTITY_SERVICE_NAME = "IDENTITY_SERVICE_NAME";
