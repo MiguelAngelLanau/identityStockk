@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import stockkms.identity_stockk.common.RESTuser;
+import stockkms.identity_stockk.common.Pair;
 import java.util.Map;
-import jdk.internal.net.http.common.Pair;
+import java.util.concurrent.TimeUnit;
 import stockkms.identity_stockk.common.Configs;
 import stockkms.identity_stockk.common.Hasher;
 import stockkms.identity_stockk.common.RandomString;
@@ -23,13 +24,12 @@ import sun.security.krb5.KrbException;
  * @author Miguel Ángel Lanau
  */
 public class IdentityStore {
+    private static final int MAX_TOKEN_TIME = 5;
     private static IdentityStore instancia = null;
     private Configs config;
     private Map<String, User> users;
-    //private Map<String, Pair<RESTuser, Integer>> restUsers;
-    private Map<String, RESTuser> restUsers;
+    private Map<String, Pair<RESTuser, Long>> restUsers;
     private Gson gson;
-    private final String filePath ="identity_stockk/users.json";
 
     public IdentityStore() throws KrbException {
         try{
@@ -53,7 +53,6 @@ public class IdentityStore {
     
     private void load() throws FileNotFoundException{
         File f = new File(config.getProp(Configs.IDENTITY_FILE_PATH));
-        //File f = new File(filePath);
         if (! f.exists()){
             File fd = new File(config.getProp(Configs.IDENTITY_DIRECTORY_NAME));
             if (! fd.exists()){
@@ -72,7 +71,7 @@ public class IdentityStore {
     private synchronized void save(){
         try {
             FileWriter fw = new FileWriter(config.getProp(Configs.IDENTITY_FILE_PATH));
-            //FileWriter fw = new FileWriter(filePath);
+            
             gson.toJson(users, fw);
             fw.flush();
             fw.close();
@@ -82,6 +81,8 @@ public class IdentityStore {
     }
     
     public synchronized void createUser(RESTuser restUser, String clearPwd) {
+        Pair<RESTuser, Long> tupla;
+        
         String login = restUser.getLogin();
         String name = restUser.getName();
         String password = Hasher.getSHA256(clearPwd);
@@ -89,35 +90,61 @@ public class IdentityStore {
         User user = new User(login, name, password);
         
         users.put(restUser.getLogin(), user);
-        //Pair<RESTuser, Integer> tupla = new Pair<RESTuser, Integer>(restUser, 5);
         String token = generateToken();
-        restUsers.put(token, restUser);
+        tupla = new Pair<>(restUser, System.currentTimeMillis());
+        restUsers.put(token, tupla);
         save();
     }
     
     public synchronized RESTuser getUser(String token) {
-        RESTuser restUser = restUsers.get(token);
-        cancelToken(token);
-        restUsers.put(generateToken(), restUser);
-        return restUser;
+        Pair<RESTuser, Long> tupla;
+        RESTuser restUser;
+        Long lastMs;
+        
+        tupla = restUsers.get(token);
+        
+        if(tupla != null){
+            restUser = tupla.first;
+            lastMs = tupla.second;
+            
+            if(TimeUnit.MILLISECONDS.toMinutes(
+                    System.currentTimeMillis() - lastMs) < MAX_TOKEN_TIME){
+                
+                tupla = new Pair<>(restUser, System.currentTimeMillis());
+                restUsers.put(token, tupla);
+            
+                return restUser;
+            }else{
+                cancelToken(token);
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
     
     public synchronized void changePassword(String token, String clearPwd) {
-        RESTuser restUser = restUsers.get(token);
-        if (restUser != null){
-            User user = users.get(restUser.getLogin());
+        Pair<RESTuser, Long> tupla;
+        
+        tupla = restUsers.get(token);
+        if (tupla != null){
+            User user = users.get(tupla.first.getLogin());
             user.setPassword(Hasher.getSHA256(clearPwd));
-            users.put(restUser.getLogin(), user);
+            users.put(tupla.first.getLogin(), user);
             save();
         }
     }
     
     public synchronized String getToken(String login, String pwd) {
-        User user = users.get(login);
+        User user;
+        Pair<RESTuser, Long> tupla;
+        
+        user = users.get(login);
         if(user != null){
             if(user.getPassword().equals(Hasher.getSHA256(pwd))){
                 String token = generateToken();
-                restUsers.put(token, user.toRESTuser());
+                tupla = new Pair<>(user.toRESTuser(), System.currentTimeMillis());
+                restUsers.put(token, tupla);
                 return token;
             }else{
                 return null;
