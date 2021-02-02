@@ -8,10 +8,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import stockkms.identity_stockk.common.StatusCode;
 
-/**
- *
- * @author fsernafortea
- */
+
 @Singleton
 @Startup
 public class Starter {

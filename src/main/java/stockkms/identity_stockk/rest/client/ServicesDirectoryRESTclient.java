@@ -5,19 +5,6 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
-/**
- * Jersey REST client generated for REST resource:ServicesDirectoryRESTservice
- * [directory]<br>
- * USAGE:
- * <pre>
- *        DirectoryRESTclient client = new DirectoryRESTclient();
- *        Object response = client.XXX(...);
- *        // do whatever with response
- *        client.close();
- * </pre>
- *
- * @author fsernafortea
- */
 public class ServicesDirectoryRESTclient {
     private WebTarget webTarget;
     private Client client;

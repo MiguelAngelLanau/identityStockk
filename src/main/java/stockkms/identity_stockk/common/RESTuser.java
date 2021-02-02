@@ -5,12 +5,6 @@ package stockkms.identity_stockk.common;
 import com.google.gson.Gson;
 import java.io.Serializable;
 
-/**
- * This user is meant to be the REST payload.
- * It does not contain the DB primaryKey, password, nor the privateKey.
- * 
- * @author fserna
- */
 public class RESTuser implements Serializable {
 
     private String login;

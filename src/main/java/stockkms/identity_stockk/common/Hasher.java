@@ -6,11 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-
-/**
- *
- * @author Félix Serna
- */
 public class Hasher {
 
     public static String getSHA256(byte[] _msg){

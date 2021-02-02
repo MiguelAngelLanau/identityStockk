@@ -5,10 +5,7 @@ package stockkms.identity_stockk.common;
 import com.google.gson.Gson;
 import java.io.Serializable;
 
-/**
- *
- * @author Usuario
- */
+
 public class RESTstockkService implements Serializable {
 
     private String name;

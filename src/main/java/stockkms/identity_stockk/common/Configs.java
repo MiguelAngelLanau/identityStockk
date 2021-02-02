@@ -4,10 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- *
- * @author Miguel Ángel Lanau
- */
 public class Configs {
 
     private static final String CONFIG_FILE = "identity_stockk/config.properties";

@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockkms.identity_stockk.common;
 
-/**
- *
- * @author Michi
- */
 public class RandomString {
 
     public static String getAlphaNumericString(int n) {

@@ -10,10 +10,6 @@ import stockkms.identity_stockk.common.RESTstockkService;
 import stockkms.identity_stockk.common.StatusCode;
 
 
-/**
- *
- * @author fsernafortea
- */
 @Stateless
 public class TouchTimer {
 

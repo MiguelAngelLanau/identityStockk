@@ -19,10 +19,6 @@ import stockkms.identity_stockk.common.RandomString;
 import stockkms.identity_stockk.common.User;
 import sun.security.krb5.KrbException;
 
-/**
- *
- * @author Miguel Ángel Lanau
- */
 public class IdentityStore {
     private static final int MAX_TOKEN_TIME = 5;
     private static IdentityStore instancia = null;
