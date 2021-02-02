@@ -20,7 +20,7 @@ import stockkms.identity_stockk.common.User;
 import sun.security.krb5.KrbException;
 
 public class IdentityStore {
-    private static final int MAX_TOKEN_TIME = 5;
+    private static final int MAX_TOKEN_TIME = 12;
     private static IdentityStore instancia = null;
     private Configs config;
     private Map<String, User> users;
